@@ -29,9 +29,6 @@ jobs:
         run: |
           version_label=$GITHUB_REF_NAME-$(date '+%Y%m%d')
           docker build --file "$GITHUB_WORKSPACE/Dockerfile" --target arkst --tag nhalase/ark:latest --label "version=$version_label" --label "github.ref=$GITHUB_REF" --label "github.runid=$GITHUB_RUN_ID" "$GITHUB_WORKSPACE"
-      - name: "Test images"
-        run: |
-          docker run --entrypoint /bin/sh -it --rm nhalase/ark:latest -c date
       - name: "Publish images"
         run: |
           docker push nhalase/ark:latest
