@@ -1,3 +1,7 @@
+[![Build Status](https://github.com/nhalase/ark/actions/workflows/build-and-publish.yaml/badge.svg)](https://github.com/nhalase/ark/actions)
+[![Docker Pulls](https://img.shields.io/docker/pulls/nhalase/ark.svg)](https://hub.docker.com/r/nhalase/ark)
+[![Image Size](https://img.shields.io/docker/image-size/nhalase/ark/latest.svg)](https://hub.docker.com/r/nhalase/ark)
+
 # ARK
 
 A Docker image for running an [ARK: Survival Evolved](https://store.steampowered.com/app/346110/ARK_Survival_Evolved/) dedicated linux server using [ark-server-tools](https://github.com/arkmanager/ark-server-tools).
