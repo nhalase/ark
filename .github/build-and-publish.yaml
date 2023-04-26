@@ -1,0 +1,37 @@
+name: "Build and publish images"
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  push:
+    branches:
+      - main
+    tags:
+      - '*'
+  workflow_dispatch:
+
+env:
+  DOCKER_BUILDKIT: 1
+
+jobs:
+  build-and-publish:
+    name: "Build and publish"
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout repository"
+        uses: actions/checkout@v3
+      - name: "Log in to Docker"
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: "Build images"
+        run: |
+          version_label=$GITHUB_REF_NAME-$(date '+%Y%m%d')
+          docker build --file "$GITHUB_WORKSPACE/Dockerfile" --target arkst --tag nhalase/ark:latest --label "version=$version_label" --label "github.ref=$GITHUB_REF" --label "github.runid=$GITHUB_RUN_ID" "$GITHUB_WORKSPACE"
+      - name: "Test images"
+        run: |
+          docker run --entrypoint /bin/sh -it --rm nhalase/ark:latest -c date
+      - name: "Publish images"
+        run: |
+          docker push nhalase/ark:latest
