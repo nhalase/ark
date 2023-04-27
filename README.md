@@ -8,6 +8,8 @@ A Docker image for running an [ARK: Survival Evolved](https://store.steampowered
 This image has a focus on being run in a Kubernetes cluster, but was inspired by [NightDragon1/Ark-docker](https://github.com/NightDragon1/Ark-docker).
 If you're just looking to run a Docker-based ARK server container, you should probably use that project instead.
 
+Fresh builds every 24-hours!
+
 ## What's unique about this project?
 
 - Based on [nhalase/steamcmd](https://github.com/nhalase/steamcmd), which is in turn based on an `ubuntu:latest` image (Ubuntu tags `latest` to mean latest LTS release)
