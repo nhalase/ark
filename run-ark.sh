@@ -24,31 +24,31 @@ stop() {
 [ ! -d /ark/backup ] && mkdir /ark/backup
 [ ! -d /ark/staging ] && mkdir /ark/staging
 
-if [ ! -d /ark/server  ] || [ ! -f /ark/server/version.txt ]; then
+if [ ! -d /ark/server ] || [ ! -f /ark/server/version.txt ]; then
   echo "No game files found. Installing..."
   arkmanager install --verbose
 else
   if [ "${BACKUPONSTART}" -eq 1 ] && [ "$(ls -A server/ShooterGame/Saved/SavedArks/)" ]; then
-		echo "[Backup]"
-		arkmanager backup
-	fi
+    echo "[Backup]"
+    arkmanager backup
+  fi
+fi
+
+# Launching ark server
+if [ "$UPDATEONSTART" -eq 0 ]; then
+  arkmanager start --noautoupdate --verbose "$@"
+else
+  arkmanager start --verbose "$@"
 fi
 
 # Installing crontab for user steam
 echo "Loading crontab..."
 crontab "$ARK_CRONTAB"
 
-# Launching ark server
-if [ "$UPDATEONSTART" -eq 0 ]; then
-	arkmanager start --noautoupdate --verbose "$@"
-else
-	arkmanager start --verbose "$@"
-fi
-
 # Stop server in case of signal INT or TERM
 echo "Waiting..."
 trap stop INT
 trap stop TERM
 
-read -r < /tmp/FIFO &
+read -r </tmp/FIFO &
 wait

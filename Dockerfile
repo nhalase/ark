@@ -52,6 +52,11 @@ RUN set -x \
   && (crontab -l 2>/dev/null; echo "* 3 * * Mon yes | arkmanager upgrade-tools >> /ark/log/arkmanager-upgrade.log 2>&1") | crontab - \
   && mkdir /ark \
   && chown steam /ark && chmod 755 /ark \
+  && echo "fs.file-max=1000000" >> /etc/sysctl.conf \
+  && sysctl -p /etc/sysctl.conf \
+  && echo "*               soft    nofile          1000000" >> /etc/security/limits.conf \
+  && echo "*               hard    nofile          1000000" >> /etc/security/limits.conf \
+  && echo "session required pam_limits.so" >> /etc/pam.d/common-session \
   # Clean up
   && apt-get remove --purge --auto-remove -y \
   && rm -rf /var/cache/apt/archives /var/lib/apt/lists/*

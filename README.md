@@ -5,7 +5,7 @@
 # ARK
 
 A Docker image for running an [ARK: Survival Evolved](https://store.steampowered.com/app/346110/ARK_Survival_Evolved/) dedicated linux server using [ark-server-tools](https://github.com/arkmanager/ark-server-tools).
-This image has a focus on being run in a Kubernetes cluster, but was inspired by [NightDragon1/Ark-docker](https://github.com/NightDragon1/Ark-docker). 
+This image has a focus on being run in a Kubernetes cluster, but was inspired by [NightDragon1/Ark-docker](https://github.com/NightDragon1/Ark-docker).
 If you're just looking to run a Docker-based ARK server container, you should probably use that project instead.
 
 ## What's unique about this project?
