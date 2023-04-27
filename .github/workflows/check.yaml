@@ -2,11 +2,7 @@ name: "Quality Check"
 permissions: {}
 
 on:
-  push:
-    branches:
-      - "*"
-    tags:
-      - "*"
+  workflow_call:
   workflow_dispatch:
 
 jobs:

@@ -14,8 +14,13 @@ env:
   DOCKER_BUILDKIT: 1
 
 jobs:
+  check:
+    name: "Quality Check"
+    uses: ./.github/workflows/check.yaml
   build-and-publish:
     name: "Build and publish"
+    needs:
+      - check
     runs-on: ubuntu-latest
     steps:
       - name: "Checkout repository"
